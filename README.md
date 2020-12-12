@@ -4,7 +4,7 @@ How to run:
 
 $ source venv/bin/activate
 
-$ python3 __main__.py
+$ python3 \_\_main_\_.py
 
 How to test:
 
