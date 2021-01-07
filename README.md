@@ -12,7 +12,7 @@ For consecutive runs, we need to clean the environment.
 In the source directory:
 1. execute $ docker-compose down
 2. list docker images
-3. remove the docker image which name ends with "api"
+3. remove the docker image with the name of this repository
 </br></br>
 
 MySQL Database is exposed on host port 3306.</br>
