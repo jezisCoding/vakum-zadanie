@@ -7,7 +7,7 @@ How to run:
 	
 	b. execute $ docker-compose up
 
-cancel runtime with ctrl+C
+You can cancel the runtime with ctrl+C.
 
 
 For consecutive runs, we need to clean the environment.
@@ -18,5 +18,7 @@ In the source directory:
 
 
 MySQL Database is exposed on host port 3306.
+
 Username is 'user'
+
 Password is 'password'
