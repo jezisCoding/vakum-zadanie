@@ -1,26 +1,35 @@
-trademarks = "NANI"
-trademarks = {'a':'brekeke', 'b':'clekeke'}
+from dbconnector import DBConnector
+from dicttoxml import dicttoxml
 
-def getByExactName():
-    return "sugondese"
-def getByApproximateName():
-    return "ligma?"
-
-# Here we define API call handlers
-
-def getByExactName(name):
+def get_by_exact_name(name):
     """
-    :returns: trademark object matching the name parameter.
+    Returns the trademark objects exactly matching the name parameter
     """
-    return trademarks[name]
+    dbc = DBConnector()
+    dbc.connect()
 
-def getByApproximateName(name):
+    # Search case sensitively
+    result = dbc.select_where(name)
+
+    dbc.disconnect()
+    return dicttoxml(result).decode("utf-8")
+
+def get_by_approx_name(name):
     """
-    :returns: all trademark objects closely matching the name parameter.
+    Returns the trademark objects closely matching the name parameter
     """
-    return "nieeee"
-    #return trademarks.search(name)
+    dbc = DBConnector()
+    dbc.connect()
 
-# API call handlers end here
+    # Search case insensitively
+    result = dbc.select_where(name, False)
 
+    dbc.disconnect()
+    return dicttoxml(result).decode("utf-8")
 
+if __name__ == "__main__":
+    tm = ("al", "al", "sl", "mf", "mvet")
+    print(dicttoxml(tm).decode("utf-8"), flush=True)
+    #print(get_by_exact_name("VERIFAI"))
+    #print(get_by_exact_name("Verifai"))
+    #print(get_by_approx_name("Verifai"))

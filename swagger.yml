@@ -1,10 +1,10 @@
 swagger: "2.0"
 info:
-  description: "This is a simple trademark search server for trademarks registered in Europe. You can use this to check for existing trademarks with the provided endpoints/resources."
+  description: "This is a simple trademark search api for trademarks registered in EU. You can use the provided endpoints/resources to check for existing trademarks."
   version: "1.0.0"
-  title: "Europe trademark search"
+  title: "EU trademark search"
   contact:
-    email: "samueldubcak@gmail.com"
+    email: "deagllle@gmail.com"
 host: "localhost:5000"
 basePath: "/v1"
 tags:
@@ -18,12 +18,11 @@ paths:
     get:
       tags:
       - "trademark"
-      summary: "Returns a simplified trademark object based on it's exact name"
+      summary: "Returns an array of simplified trademark objects based on their exact name"
       description: ""
-      operationId: "handler.getByExactName"
+      operationId: "handler.get_by_exact_name"
       produces:
       - "application/xml"
-      - "application/json"
       parameters:
       - name: "name"
         in: "query"
@@ -41,12 +40,11 @@ paths:
     get:
       tags:
       - "trademark"
-      summary: "Returns an array of simplified trademark objects based on their approximate search name"
+      summary: "Returns an array of simplified trademark objects based on their approximate name"
       description: ""
-      operationId: "handler.getByApproximateName"
+      operationId: "handler.get_by_approx_name"
       produces:
       - "application/xml"
-      - "application/json"
       parameters:
       - name: "name"
         in: "query"
@@ -67,24 +65,21 @@ definitions:
   Trademark:
     type: "object"
     properties:
-      MarkFeature:
-        type: "string"
-        example: "Word"
-      WordMarkSpecification:
-        type: "string"
-        example: "NOMAD"
-      MarkCurrentStatusCode:
-        type: "string"
-        example: "Registered"
       ApplicationDate:
         type: "string"
         example: "2001-01-04"
-      RegistrationDate:
+      ApplicationLanguageCode:
         type: "string"
-        example: "2002-07-10"
-      ExpiryDate:
+        example: "en"
+      SecondLanguageCode:
         type: "string"
-        example: "2021-01-04"
+        example: "fr"
+      MarkFeature:
+        type: "string"
+        example: "Word"
+      MarkVerbalElementText:
+        type: "string"
+        example: "VERIFAI"
     xml:
       name: "Trademark"
   TrademarkArray:

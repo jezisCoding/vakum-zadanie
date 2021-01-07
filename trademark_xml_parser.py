@@ -19,7 +19,7 @@ def parse_dir(dirpath):
         # If entry's name ends in .xml
         if entry[-4:] == ".xml": 
             # Parse it
-            print("parse_file("+dirpath+"/"+entry+")")
+            # print("parse_file("+dirpath+"/"+entry+")", flush=True)
             trademark = parse_file(dirpath + "/" + entry)
 
             if trademark is not None:
@@ -44,7 +44,7 @@ def parse_file(filepath):
     # If this trademark's MarkFeature is not Word
     # Find using XPath expression
     if next(tree.iterfind(".//{"+xmlns+"}MarkFeature")).text != "Word":
-        print("Non-Word MarkFeature trademark. Ignoring.")
+        # print("Non-Word MarkFeature trademark. Ignoring.", flush=True)
         return None
 
     # Else construct the tuple from it
@@ -57,7 +57,7 @@ def parse_file(filepath):
                 next(tree.iterfind(".//{"+xmlns+"}ApplicationDate")).text)
         except StopIteration:
             # If subelement not found
-            trademark.append("UNDEFINED") # max 10 chars
+            trademark.append("UNDEFINED") # max 10 chars in this db column
         trademark.append(
             next(tree.iterfind(".//{"+xmlns+"}ApplicationLanguageCode")).text)
         trademark.append(
@@ -68,7 +68,7 @@ def parse_file(filepath):
             next(tree.iterfind(".//{"+xmlns+"}MarkVerbalElementText")).text)
         trademark = tuple(trademark)
 
-        print("Returning trademark.")
+        # print("Returning trademark.", flush=True)
         return trademark
 
 class ParseError(Exception):
@@ -80,9 +80,9 @@ if __name__ == "__main__":
     filepath = datafolder + filename
 
     trademark = parse_file(filepath)
-    print("Single trademark:")
-    print(trademark)
+    print("Single trademark:", flush=True)
+    print(trademark, flush=True)
     
     trademarks = parse_dir(datafolder)
-    print("Trademarks array:")
-    print(trademarks)
+    print("Trademarks array:", flush=True)
+    print(trademarks, flush=True)
